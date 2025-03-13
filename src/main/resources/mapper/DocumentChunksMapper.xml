@@ -9,14 +9,12 @@
     <result column="chunk_index" jdbcType="INTEGER" property="chunkIndex" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="metadata" jdbcType="VARCHAR" property="metadata" />
-    <result column="vector_embedding" jdbcType="BLOB" property="vectorEmbedding" />
     <result column="embedding_model" jdbcType="VARCHAR" property="embeddingModel" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, document_id, chunk_index, content, metadata, vector_embedding, embedding_model, 
-    created_at
+    id, document_id, chunk_index, content, metadata, embedding_model, created_at
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -33,11 +31,11 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.DocumentChunks" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into document_chunks (document_id, chunk_index, content, 
-      metadata, vector_embedding, embedding_model, 
-      created_at)
+      metadata, embedding_model, created_at
+      )
     values (#{documentId,jdbcType=BIGINT}, #{chunkIndex,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, 
-      #{metadata,jdbcType=VARCHAR}, #{vectorEmbedding,jdbcType=BLOB}, #{embeddingModel,jdbcType=VARCHAR}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{metadata,jdbcType=VARCHAR}, #{embeddingModel,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.DocumentChunks" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -54,9 +52,6 @@
       </if>
       <if test="metadata != null">
         metadata,
-      </if>
-      <if test="vectorEmbedding != null">
-        vector_embedding,
       </if>
       <if test="embeddingModel != null and embeddingModel != ''">
         embedding_model,
@@ -77,9 +72,6 @@
       </if>
       <if test="metadata != null">
         #{metadata,jdbcType=VARCHAR},
-      </if>
-      <if test="vectorEmbedding != null">
-        #{vectorEmbedding,jdbcType=BLOB},
       </if>
       <if test="embeddingModel != null and embeddingModel != ''">
         #{embeddingModel,jdbcType=VARCHAR},
@@ -105,9 +97,6 @@
       <if test="metadata != null">
         metadata = #{metadata,jdbcType=VARCHAR},
       </if>
-      <if test="vectorEmbedding != null">
-        vector_embedding = #{vectorEmbedding,jdbcType=BLOB},
-      </if>
       <if test="embeddingModel != null and embeddingModel != ''">
         embedding_model = #{embeddingModel,jdbcType=VARCHAR},
       </if>
@@ -124,7 +113,6 @@
       chunk_index = #{chunkIndex,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR},
       metadata = #{metadata,jdbcType=VARCHAR},
-      vector_embedding = #{vectorEmbedding,jdbcType=BLOB},
       embedding_model = #{embeddingModel,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
