@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.KnowledgeBasePermissionsMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.KnowledgeBasePermissions">
+    <!--@mbg.generated-->
+    <!--@Table knowledge_base_permissions-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="knowledge_base_id" jdbcType="BIGINT" property="knowledgeBaseId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="permission_type" jdbcType="VARCHAR" property="permissionType" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, knowledge_base_id, user_id, permission_type, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from knowledge_base_permissions
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from knowledge_base_permissions
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.KnowledgeBasePermissions" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into knowledge_base_permissions (knowledge_base_id, user_id, permission_type, 
+      created_at, updated_at)
+    values (#{knowledgeBaseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{permissionType,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.KnowledgeBasePermissions" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into knowledge_base_permissions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="permissionType != null and permissionType != ''">
+        permission_type,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="knowledgeBaseId != null">
+        #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="permissionType != null and permissionType != ''">
+        #{permissionType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.KnowledgeBasePermissions">
+    <!--@mbg.generated-->
+    update knowledge_base_permissions
+    <set>
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="permissionType != null and permissionType != ''">
+        permission_type = #{permissionType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.KnowledgeBasePermissions">
+    <!--@mbg.generated-->
+    update knowledge_base_permissions
+    set knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      permission_type = #{permissionType,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

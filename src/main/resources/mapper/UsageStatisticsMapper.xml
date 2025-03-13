@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.UsageStatisticsMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.UsageStatistics">
+    <!--@mbg.generated-->
+    <!--@Table usage_statistics-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="conversation_count" jdbcType="INTEGER" property="conversationCount" />
+    <result column="message_count" jdbcType="INTEGER" property="messageCount" />
+    <result column="token_count" jdbcType="INTEGER" property="tokenCount" />
+    <result column="prompt_tokens" jdbcType="INTEGER" property="promptTokens" />
+    <result column="completion_tokens" jdbcType="INTEGER" property="completionTokens" />
+    <result column="embedding_count" jdbcType="INTEGER" property="embeddingCount" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, `date`, conversation_count, message_count, token_count, prompt_tokens, 
+    completion_tokens, embedding_count, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from usage_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from usage_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.UsageStatistics" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into usage_statistics (user_id, `date`, conversation_count, 
+      message_count, token_count, prompt_tokens, 
+      completion_tokens, embedding_count, created_at, 
+      updated_at)
+    values (#{userId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{conversationCount,jdbcType=INTEGER}, 
+      #{messageCount,jdbcType=INTEGER}, #{tokenCount,jdbcType=INTEGER}, #{promptTokens,jdbcType=INTEGER}, 
+      #{completionTokens,jdbcType=INTEGER}, #{embeddingCount,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.UsageStatistics" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into usage_statistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="conversationCount != null">
+        conversation_count,
+      </if>
+      <if test="messageCount != null">
+        message_count,
+      </if>
+      <if test="tokenCount != null">
+        token_count,
+      </if>
+      <if test="promptTokens != null">
+        prompt_tokens,
+      </if>
+      <if test="completionTokens != null">
+        completion_tokens,
+      </if>
+      <if test="embeddingCount != null">
+        embedding_count,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="conversationCount != null">
+        #{conversationCount,jdbcType=INTEGER},
+      </if>
+      <if test="messageCount != null">
+        #{messageCount,jdbcType=INTEGER},
+      </if>
+      <if test="tokenCount != null">
+        #{tokenCount,jdbcType=INTEGER},
+      </if>
+      <if test="promptTokens != null">
+        #{promptTokens,jdbcType=INTEGER},
+      </if>
+      <if test="completionTokens != null">
+        #{completionTokens,jdbcType=INTEGER},
+      </if>
+      <if test="embeddingCount != null">
+        #{embeddingCount,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.UsageStatistics">
+    <!--@mbg.generated-->
+    update usage_statistics
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="conversationCount != null">
+        conversation_count = #{conversationCount,jdbcType=INTEGER},
+      </if>
+      <if test="messageCount != null">
+        message_count = #{messageCount,jdbcType=INTEGER},
+      </if>
+      <if test="tokenCount != null">
+        token_count = #{tokenCount,jdbcType=INTEGER},
+      </if>
+      <if test="promptTokens != null">
+        prompt_tokens = #{promptTokens,jdbcType=INTEGER},
+      </if>
+      <if test="completionTokens != null">
+        completion_tokens = #{completionTokens,jdbcType=INTEGER},
+      </if>
+      <if test="embeddingCount != null">
+        embedding_count = #{embeddingCount,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.UsageStatistics">
+    <!--@mbg.generated-->
+    update usage_statistics
+    set user_id = #{userId,jdbcType=BIGINT},
+      `date` = #{date,jdbcType=DATE},
+      conversation_count = #{conversationCount,jdbcType=INTEGER},
+      message_count = #{messageCount,jdbcType=INTEGER},
+      token_count = #{tokenCount,jdbcType=INTEGER},
+      prompt_tokens = #{promptTokens,jdbcType=INTEGER},
+      completion_tokens = #{completionTokens,jdbcType=INTEGER},
+      embedding_count = #{embeddingCount,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.RetrievalResultsMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.RetrievalResults">
+    <!--@mbg.generated-->
+    <!--@Table retrieval_results-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="message_id" jdbcType="BIGINT" property="messageId" />
+    <result column="chunk_id" jdbcType="BIGINT" property="chunkId" />
+    <result column="relevance_score" jdbcType="DECIMAL" property="relevanceScore" />
+    <result column="ranking" jdbcType="INTEGER" property="ranking" />
+    <result column="used_in_response" jdbcType="TINYINT" property="usedInResponse" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, message_id, chunk_id, relevance_score, ranking, used_in_response, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from retrieval_results
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from retrieval_results
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.RetrievalResults" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into retrieval_results (message_id, chunk_id, relevance_score, 
+      ranking, used_in_response, created_at
+      )
+    values (#{messageId,jdbcType=BIGINT}, #{chunkId,jdbcType=BIGINT}, #{relevanceScore,jdbcType=DECIMAL}, 
+      #{ranking,jdbcType=INTEGER}, #{usedInResponse,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.RetrievalResults" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into retrieval_results
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="chunkId != null">
+        chunk_id,
+      </if>
+      <if test="relevanceScore != null">
+        relevance_score,
+      </if>
+      <if test="ranking != null">
+        ranking,
+      </if>
+      <if test="usedInResponse != null">
+        used_in_response,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="chunkId != null">
+        #{chunkId,jdbcType=BIGINT},
+      </if>
+      <if test="relevanceScore != null">
+        #{relevanceScore,jdbcType=DECIMAL},
+      </if>
+      <if test="ranking != null">
+        #{ranking,jdbcType=INTEGER},
+      </if>
+      <if test="usedInResponse != null">
+        #{usedInResponse,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.RetrievalResults">
+    <!--@mbg.generated-->
+    update retrieval_results
+    <set>
+      <if test="messageId != null">
+        message_id = #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="chunkId != null">
+        chunk_id = #{chunkId,jdbcType=BIGINT},
+      </if>
+      <if test="relevanceScore != null">
+        relevance_score = #{relevanceScore,jdbcType=DECIMAL},
+      </if>
+      <if test="ranking != null">
+        ranking = #{ranking,jdbcType=INTEGER},
+      </if>
+      <if test="usedInResponse != null">
+        used_in_response = #{usedInResponse,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.RetrievalResults">
+    <!--@mbg.generated-->
+    update retrieval_results
+    set message_id = #{messageId,jdbcType=BIGINT},
+      chunk_id = #{chunkId,jdbcType=BIGINT},
+      relevance_score = #{relevanceScore,jdbcType=DECIMAL},
+      ranking = #{ranking,jdbcType=INTEGER},
+      used_in_response = #{usedInResponse,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

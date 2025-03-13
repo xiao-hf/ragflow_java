@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.MessagesMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.Messages">
+    <!--@mbg.generated-->
+    <!--@Table messages-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="conversation_id" jdbcType="BIGINT" property="conversationId" />
+    <result column="sender_type" jdbcType="VARCHAR" property="senderType" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="tokens" jdbcType="INTEGER" property="tokens" />
+    <result column="metadata" jdbcType="VARCHAR" property="metadata" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, conversation_id, sender_type, content, tokens, metadata, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from messages
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from messages
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Messages" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into messages (conversation_id, sender_type, content, 
+      tokens, metadata, created_at
+      )
+    values (#{conversationId,jdbcType=BIGINT}, #{senderType,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{tokens,jdbcType=INTEGER}, #{metadata,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Messages" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into messages
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="conversationId != null">
+        conversation_id,
+      </if>
+      <if test="senderType != null and senderType != ''">
+        sender_type,
+      </if>
+      <if test="content != null and content != ''">
+        content,
+      </if>
+      <if test="tokens != null">
+        tokens,
+      </if>
+      <if test="metadata != null">
+        metadata,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="conversationId != null">
+        #{conversationId,jdbcType=BIGINT},
+      </if>
+      <if test="senderType != null and senderType != ''">
+        #{senderType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null and content != ''">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tokens != null">
+        #{tokens,jdbcType=INTEGER},
+      </if>
+      <if test="metadata != null">
+        #{metadata,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.Messages">
+    <!--@mbg.generated-->
+    update messages
+    <set>
+      <if test="conversationId != null">
+        conversation_id = #{conversationId,jdbcType=BIGINT},
+      </if>
+      <if test="senderType != null and senderType != ''">
+        sender_type = #{senderType,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tokens != null">
+        tokens = #{tokens,jdbcType=INTEGER},
+      </if>
+      <if test="metadata != null">
+        metadata = #{metadata,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.Messages">
+    <!--@mbg.generated-->
+    update messages
+    set conversation_id = #{conversationId,jdbcType=BIGINT},
+      sender_type = #{senderType,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      tokens = #{tokens,jdbcType=INTEGER},
+      metadata = #{metadata,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.ApiKeysMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.ApiKeys">
+    <!--@mbg.generated-->
+    <!--@Table api_keys-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="key_name" jdbcType="VARCHAR" property="keyName" />
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="last_used_at" jdbcType="TIMESTAMP" property="lastUsedAt" />
+    <result column="expired_at" jdbcType="TIMESTAMP" property="expiredAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, key_name, api_key, `status`, last_used_at, expired_at, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from api_keys
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from api_keys
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.ApiKeys" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into api_keys (user_id, key_name, api_key, 
+      `status`, last_used_at, expired_at, 
+      created_at, updated_at)
+    values (#{userId,jdbcType=BIGINT}, #{keyName,jdbcType=VARCHAR}, #{apiKey,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{lastUsedAt,jdbcType=TIMESTAMP}, #{expiredAt,jdbcType=TIMESTAMP}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.ApiKeys" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into api_keys
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="keyName != null and keyName != ''">
+        key_name,
+      </if>
+      <if test="apiKey != null and apiKey != ''">
+        api_key,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="lastUsedAt != null">
+        last_used_at,
+      </if>
+      <if test="expiredAt != null">
+        expired_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="keyName != null and keyName != ''">
+        #{keyName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null and apiKey != ''">
+        #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastUsedAt != null">
+        #{lastUsedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiredAt != null">
+        #{expiredAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.ApiKeys">
+    <!--@mbg.generated-->
+    update api_keys
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="keyName != null and keyName != ''">
+        key_name = #{keyName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null and apiKey != ''">
+        api_key = #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastUsedAt != null">
+        last_used_at = #{lastUsedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiredAt != null">
+        expired_at = #{expiredAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.ApiKeys">
+    <!--@mbg.generated-->
+    update api_keys
+    set user_id = #{userId,jdbcType=BIGINT},
+      key_name = #{keyName,jdbcType=VARCHAR},
+      api_key = #{apiKey,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      last_used_at = #{lastUsedAt,jdbcType=TIMESTAMP},
+      expired_at = #{expiredAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

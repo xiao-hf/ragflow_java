@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.FeedbacksMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.Feedbacks">
+    <!--@mbg.generated-->
+    <!--@Table feedbacks-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="message_id" jdbcType="BIGINT" property="messageId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="rating" jdbcType="TINYINT" property="rating" />
+    <result column="feedback_text" jdbcType="LONGVARCHAR" property="feedbackText" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, message_id, user_id, rating, feedback_text, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from feedbacks
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from feedbacks
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Feedbacks" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into feedbacks (message_id, user_id, rating, 
+      feedback_text, created_at)
+    values (#{messageId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{rating,jdbcType=TINYINT}, 
+      #{feedbackText,jdbcType=LONGVARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Feedbacks" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into feedbacks
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="rating != null">
+        rating,
+      </if>
+      <if test="feedbackText != null and feedbackText != ''">
+        feedback_text,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="rating != null">
+        #{rating,jdbcType=TINYINT},
+      </if>
+      <if test="feedbackText != null and feedbackText != ''">
+        #{feedbackText,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.Feedbacks">
+    <!--@mbg.generated-->
+    update feedbacks
+    <set>
+      <if test="messageId != null">
+        message_id = #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="rating != null">
+        rating = #{rating,jdbcType=TINYINT},
+      </if>
+      <if test="feedbackText != null and feedbackText != ''">
+        feedback_text = #{feedbackText,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.Feedbacks">
+    <!--@mbg.generated-->
+    update feedbacks
+    set message_id = #{messageId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      rating = #{rating,jdbcType=TINYINT},
+      feedback_text = #{feedbackText,jdbcType=LONGVARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

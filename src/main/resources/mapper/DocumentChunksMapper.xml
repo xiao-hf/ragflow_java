@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.DocumentChunksMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.DocumentChunks">
+    <!--@mbg.generated-->
+    <!--@Table document_chunks-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="document_id" jdbcType="BIGINT" property="documentId" />
+    <result column="chunk_index" jdbcType="INTEGER" property="chunkIndex" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="metadata" jdbcType="VARCHAR" property="metadata" />
+    <result column="vector_embedding" jdbcType="BLOB" property="vectorEmbedding" />
+    <result column="embedding_model" jdbcType="VARCHAR" property="embeddingModel" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, document_id, chunk_index, content, metadata, vector_embedding, embedding_model, 
+    created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from document_chunks
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from document_chunks
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.DocumentChunks" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into document_chunks (document_id, chunk_index, content, 
+      metadata, vector_embedding, embedding_model, 
+      created_at)
+    values (#{documentId,jdbcType=BIGINT}, #{chunkIndex,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, 
+      #{metadata,jdbcType=VARCHAR}, #{vectorEmbedding,jdbcType=BLOB}, #{embeddingModel,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.DocumentChunks" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into document_chunks
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="documentId != null">
+        document_id,
+      </if>
+      <if test="chunkIndex != null">
+        chunk_index,
+      </if>
+      <if test="content != null and content != ''">
+        content,
+      </if>
+      <if test="metadata != null">
+        metadata,
+      </if>
+      <if test="vectorEmbedding != null">
+        vector_embedding,
+      </if>
+      <if test="embeddingModel != null and embeddingModel != ''">
+        embedding_model,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="documentId != null">
+        #{documentId,jdbcType=BIGINT},
+      </if>
+      <if test="chunkIndex != null">
+        #{chunkIndex,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metadata != null">
+        #{metadata,jdbcType=VARCHAR},
+      </if>
+      <if test="vectorEmbedding != null">
+        #{vectorEmbedding,jdbcType=BLOB},
+      </if>
+      <if test="embeddingModel != null and embeddingModel != ''">
+        #{embeddingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.DocumentChunks">
+    <!--@mbg.generated-->
+    update document_chunks
+    <set>
+      <if test="documentId != null">
+        document_id = #{documentId,jdbcType=BIGINT},
+      </if>
+      <if test="chunkIndex != null">
+        chunk_index = #{chunkIndex,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metadata != null">
+        metadata = #{metadata,jdbcType=VARCHAR},
+      </if>
+      <if test="vectorEmbedding != null">
+        vector_embedding = #{vectorEmbedding,jdbcType=BLOB},
+      </if>
+      <if test="embeddingModel != null and embeddingModel != ''">
+        embedding_model = #{embeddingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.DocumentChunks">
+    <!--@mbg.generated-->
+    update document_chunks
+    set document_id = #{documentId,jdbcType=BIGINT},
+      chunk_index = #{chunkIndex,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+      metadata = #{metadata,jdbcType=VARCHAR},
+      vector_embedding = #{vectorEmbedding,jdbcType=BLOB},
+      embedding_model = #{embeddingModel,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

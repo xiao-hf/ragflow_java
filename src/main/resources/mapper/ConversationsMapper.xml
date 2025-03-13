@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.ConversationsMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.Conversations">
+    <!--@mbg.generated-->
+    <!--@Table conversations-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="knowledge_base_id" jdbcType="BIGINT" property="knowledgeBaseId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="system_prompt" jdbcType="LONGVARCHAR" property="systemPrompt" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="temperature" jdbcType="DECIMAL" property="temperature" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, knowledge_base_id, title, system_prompt, model, temperature, `status`, 
+    created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from conversations
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from conversations
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Conversations" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into conversations (user_id, knowledge_base_id, title, 
+      system_prompt, model, temperature, 
+      `status`, created_at, updated_at
+      )
+    values (#{userId,jdbcType=BIGINT}, #{knowledgeBaseId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{systemPrompt,jdbcType=LONGVARCHAR}, #{model,jdbcType=VARCHAR}, #{temperature,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Conversations" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into conversations
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id,
+      </if>
+      <if test="title != null and title != ''">
+        title,
+      </if>
+      <if test="systemPrompt != null and systemPrompt != ''">
+        system_prompt,
+      </if>
+      <if test="model != null and model != ''">
+        model,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="knowledgeBaseId != null">
+        #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null and title != ''">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="systemPrompt != null and systemPrompt != ''">
+        #{systemPrompt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="model != null and model != ''">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.Conversations">
+    <!--@mbg.generated-->
+    update conversations
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null and title != ''">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="systemPrompt != null and systemPrompt != ''">
+        system_prompt = #{systemPrompt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="model != null and model != ''">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.Conversations">
+    <!--@mbg.generated-->
+    update conversations
+    set user_id = #{userId,jdbcType=BIGINT},
+      knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      system_prompt = #{systemPrompt,jdbcType=LONGVARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      temperature = #{temperature,jdbcType=DECIMAL},
+      `status` = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

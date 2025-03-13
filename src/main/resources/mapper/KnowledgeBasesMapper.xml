@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.KnowledgeBasesMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.KnowledgeBases">
+    <!--@mbg.generated-->
+    <!--@Table knowledge_bases-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="creator_id" jdbcType="BIGINT" property="creatorId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="embedding_model" jdbcType="VARCHAR" property="embeddingModel" />
+    <result column="llm_model" jdbcType="VARCHAR" property="llmModel" />
+    <result column="config" jdbcType="VARCHAR" property="config" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, description, creator_id, `status`, embedding_model, llm_model, config, 
+    created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from knowledge_bases
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from knowledge_bases
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.KnowledgeBases" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into knowledge_bases (`name`, description, creator_id, 
+      `status`, embedding_model, llm_model, 
+      config, created_at, updated_at
+      )
+    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{creatorId,jdbcType=BIGINT}, 
+      #{status,jdbcType=TINYINT}, #{embeddingModel,jdbcType=VARCHAR}, #{llmModel,jdbcType=VARCHAR}, 
+      #{config,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.KnowledgeBases" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into knowledge_bases
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null and name != ''">
+        `name`,
+      </if>
+      <if test="description != null and description != ''">
+        description,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="embeddingModel != null and embeddingModel != ''">
+        embedding_model,
+      </if>
+      <if test="llmModel != null and llmModel != ''">
+        llm_model,
+      </if>
+      <if test="config != null">
+        config,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null and name != ''">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null and description != ''">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="embeddingModel != null and embeddingModel != ''">
+        #{embeddingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="llmModel != null and llmModel != ''">
+        #{llmModel,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null">
+        #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.KnowledgeBases">
+    <!--@mbg.generated-->
+    update knowledge_bases
+    <set>
+      <if test="name != null and name != ''">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null and description != ''">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="embeddingModel != null and embeddingModel != ''">
+        embedding_model = #{embeddingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="llmModel != null and llmModel != ''">
+        llm_model = #{llmModel,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null">
+        config = #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.KnowledgeBases">
+    <!--@mbg.generated-->
+    update knowledge_bases
+    set `name` = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=TINYINT},
+      embedding_model = #{embeddingModel,jdbcType=VARCHAR},
+      llm_model = #{llmModel,jdbcType=VARCHAR},
+      config = #{config,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.DocumentsMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.Documents">
+    <!--@mbg.generated-->
+    <!--@Table documents-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="knowledge_base_id" jdbcType="BIGINT" property="knowledgeBaseId" />
+    <result column="uploader_id" jdbcType="BIGINT" property="uploaderId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_size" jdbcType="BIGINT" property="fileSize" />
+    <result column="mime_type" jdbcType="VARCHAR" property="mimeType" />
+    <result column="content_hash" jdbcType="VARCHAR" property="contentHash" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="vector_status" jdbcType="TINYINT" property="vectorStatus" />
+    <result column="error_message" jdbcType="LONGVARCHAR" property="errorMessage" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, knowledge_base_id, uploader_id, title, description, file_path, file_name, file_size, 
+    mime_type, content_hash, `status`, vector_status, error_message, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from documents
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from documents
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Documents" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into documents (knowledge_base_id, uploader_id, title, 
+      description, file_path, file_name, 
+      file_size, mime_type, content_hash, 
+      `status`, vector_status, error_message, 
+      created_at, updated_at)
+    values (#{knowledgeBaseId,jdbcType=BIGINT}, #{uploaderId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{description,jdbcType=LONGVARCHAR}, #{filePath,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+      #{fileSize,jdbcType=BIGINT}, #{mimeType,jdbcType=VARCHAR}, #{contentHash,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{vectorStatus,jdbcType=TINYINT}, #{errorMessage,jdbcType=LONGVARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Documents" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into documents
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id,
+      </if>
+      <if test="uploaderId != null">
+        uploader_id,
+      </if>
+      <if test="title != null and title != ''">
+        title,
+      </if>
+      <if test="description != null and description != ''">
+        description,
+      </if>
+      <if test="filePath != null and filePath != ''">
+        file_path,
+      </if>
+      <if test="fileName != null and fileName != ''">
+        file_name,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="mimeType != null and mimeType != ''">
+        mime_type,
+      </if>
+      <if test="contentHash != null and contentHash != ''">
+        content_hash,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="vectorStatus != null">
+        vector_status,
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="knowledgeBaseId != null">
+        #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="uploaderId != null">
+        #{uploaderId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null and title != ''">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null and description != ''">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="filePath != null and filePath != ''">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null and fileName != ''">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="mimeType != null and mimeType != ''">
+        #{mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="contentHash != null and contentHash != ''">
+        #{contentHash,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="vectorStatus != null">
+        #{vectorStatus,jdbcType=TINYINT},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.Documents">
+    <!--@mbg.generated-->
+    update documents
+    <set>
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="uploaderId != null">
+        uploader_id = #{uploaderId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null and title != ''">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null and description != ''">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="filePath != null and filePath != ''">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null and fileName != ''">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="mimeType != null and mimeType != ''">
+        mime_type = #{mimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="contentHash != null and contentHash != ''">
+        content_hash = #{contentHash,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="vectorStatus != null">
+        vector_status = #{vectorStatus,jdbcType=TINYINT},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.Documents">
+    <!--@mbg.generated-->
+    update documents
+    set knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      uploader_id = #{uploaderId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=BIGINT},
+      mime_type = #{mimeType,jdbcType=VARCHAR},
+      content_hash = #{contentHash,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      vector_status = #{vectorStatus,jdbcType=TINYINT},
+      error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

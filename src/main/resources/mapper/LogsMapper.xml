@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.LogsMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.Logs">
+    <!--@mbg.generated-->
+    <!--@Table `logs`-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="entity_type" jdbcType="VARCHAR" property="entityType" />
+    <result column="entity_id" jdbcType="VARCHAR" property="entityId" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+    <result column="user_agent" jdbcType="VARCHAR" property="userAgent" />
+    <result column="success" jdbcType="TINYINT" property="success" />
+    <result column="error_message" jdbcType="LONGVARCHAR" property="errorMessage" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, `action`, entity_type, entity_id, details, ip_address, user_agent, success, 
+    error_message, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `logs`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from `logs`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Logs" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `logs` (user_id, `action`, entity_type, 
+      entity_id, details, ip_address, 
+      user_agent, success, error_message, 
+      created_at)
+    values (#{userId,jdbcType=BIGINT}, #{action,jdbcType=VARCHAR}, #{entityType,jdbcType=VARCHAR}, 
+      #{entityId,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
+      #{userAgent,jdbcType=VARCHAR}, #{success,jdbcType=TINYINT}, #{errorMessage,jdbcType=LONGVARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.Logs" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `logs`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="action != null and action != ''">
+        `action`,
+      </if>
+      <if test="entityType != null and entityType != ''">
+        entity_type,
+      </if>
+      <if test="entityId != null and entityId != ''">
+        entity_id,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        ip_address,
+      </if>
+      <if test="userAgent != null and userAgent != ''">
+        user_agent,
+      </if>
+      <if test="success != null">
+        success,
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="action != null and action != ''">
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null and entityType != ''">
+        #{entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null and entityId != ''">
+        #{entityId,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userAgent != null and userAgent != ''">
+        #{userAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null">
+        #{success,jdbcType=TINYINT},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.Logs">
+    <!--@mbg.generated-->
+    update `logs`
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="action != null and action != ''">
+        `action` = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null and entityType != ''">
+        entity_type = #{entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="entityId != null and entityId != ''">
+        entity_id = #{entityId,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userAgent != null and userAgent != ''">
+        user_agent = #{userAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null">
+        success = #{success,jdbcType=TINYINT},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.Logs">
+    <!--@mbg.generated-->
+    update `logs`
+    set user_id = #{userId,jdbcType=BIGINT},
+      `action` = #{action,jdbcType=VARCHAR},
+      entity_type = #{entityType,jdbcType=VARCHAR},
+      entity_id = #{entityId,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      user_agent = #{userAgent,jdbcType=VARCHAR},
+      success = #{success,jdbcType=TINYINT},
+      error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

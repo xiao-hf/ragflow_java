@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.mapper.SyncTasksMapper">
+  <resultMap id="BaseResultMap" type="com.xiao.domain.SyncTasks">
+    <!--@mbg.generated-->
+    <!--@Table sync_tasks-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="knowledge_base_id" jdbcType="BIGINT" property="knowledgeBaseId" />
+    <result column="creator_id" jdbcType="BIGINT" property="creatorId" />
+    <result column="task_type" jdbcType="VARCHAR" property="taskType" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="progress" jdbcType="DECIMAL" property="progress" />
+    <result column="total_documents" jdbcType="INTEGER" property="totalDocuments" />
+    <result column="processed_documents" jdbcType="INTEGER" property="processedDocuments" />
+    <result column="error_message" jdbcType="LONGVARCHAR" property="errorMessage" />
+    <result column="started_at" jdbcType="TIMESTAMP" property="startedAt" />
+    <result column="completed_at" jdbcType="TIMESTAMP" property="completedAt" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, knowledge_base_id, creator_id, task_type, `status`, progress, total_documents, 
+    processed_documents, error_message, started_at, completed_at, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sync_tasks
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sync_tasks
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.SyncTasks" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sync_tasks (knowledge_base_id, creator_id, task_type, 
+      `status`, progress, total_documents, 
+      processed_documents, error_message, started_at, 
+      completed_at, created_at, updated_at
+      )
+    values (#{knowledgeBaseId,jdbcType=BIGINT}, #{creatorId,jdbcType=BIGINT}, #{taskType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{progress,jdbcType=DECIMAL}, #{totalDocuments,jdbcType=INTEGER}, 
+      #{processedDocuments,jdbcType=INTEGER}, #{errorMessage,jdbcType=LONGVARCHAR}, #{startedAt,jdbcType=TIMESTAMP}, 
+      #{completedAt,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiao.domain.SyncTasks" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sync_tasks
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="taskType != null and taskType != ''">
+        task_type,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="progress != null">
+        progress,
+      </if>
+      <if test="totalDocuments != null">
+        total_documents,
+      </if>
+      <if test="processedDocuments != null">
+        processed_documents,
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message,
+      </if>
+      <if test="startedAt != null">
+        started_at,
+      </if>
+      <if test="completedAt != null">
+        completed_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="knowledgeBaseId != null">
+        #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="taskType != null and taskType != ''">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="progress != null">
+        #{progress,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDocuments != null">
+        #{totalDocuments,jdbcType=INTEGER},
+      </if>
+      <if test="processedDocuments != null">
+        #{processedDocuments,jdbcType=INTEGER},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="startedAt != null">
+        #{startedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completedAt != null">
+        #{completedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiao.domain.SyncTasks">
+    <!--@mbg.generated-->
+    update sync_tasks
+    <set>
+      <if test="knowledgeBaseId != null">
+        knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="taskType != null and taskType != ''">
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="progress != null">
+        progress = #{progress,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDocuments != null">
+        total_documents = #{totalDocuments,jdbcType=INTEGER},
+      </if>
+      <if test="processedDocuments != null">
+        processed_documents = #{processedDocuments,jdbcType=INTEGER},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="startedAt != null">
+        started_at = #{startedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completedAt != null">
+        completed_at = #{completedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiao.domain.SyncTasks">
+    <!--@mbg.generated-->
+    update sync_tasks
+    set knowledge_base_id = #{knowledgeBaseId,jdbcType=BIGINT},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      progress = #{progress,jdbcType=DECIMAL},
+      total_documents = #{totalDocuments,jdbcType=INTEGER},
+      processed_documents = #{processedDocuments,jdbcType=INTEGER},
+      error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      started_at = #{startedAt,jdbcType=TIMESTAMP},
+      completed_at = #{completedAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
