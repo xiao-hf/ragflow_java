@@ -66,5 +66,9 @@ knife4j:
     enable-footer-custom: true
     footer-custom-content: RAGFlow API文档
 
+# RAGFlow配置
 ragflow:
-  pre: http://127.0.0.1
+  api:
+    key: ragflow-IwMmE4YTJlZmZlODExZWZhMzhjMDI0Mm
+    base-url: http://127.0.0.1
+    version: v1
