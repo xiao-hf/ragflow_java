@@ -3,7 +3,6 @@ package com.xiao.utils;
 import jakarta.annotation.Resource;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -166,36 +165,76 @@ public class HttpUtil {
     }
 
     /**
-     * 发送DELETE请求，内部处理异常不向外抛出
-     *
+     * 发送DELETE请求，不带请求体
+     * 
      * @param url         请求URL
      * @param headers     请求头(可为null)
      * @return            响应内容字符串，出错时返回null
      */
     public String doDelete(String url, Map<String, String> headers) {
+        return doDelete(url, headers, null);
+    }
+
+    /**
+     * 发送DELETE请求，支持请求体
+     *
+     * @param url         请求URL
+     * @param headers     请求头(可为null)
+     * @param jsonBody    JSON格式的请求体(可为null)
+     * @return            响应内容字符串，出错时返回null
+     */
+    public String doDelete(String url, Map<String, String> headers, String jsonBody) {
         String result = null;
         try {
-            // 创建HttpDelete请求
-            HttpDelete httpDelete = new HttpDelete(url);
+            // 创建HttpDelete请求，Apache HttpClient标准实现不支持带请求体的DELETE
+            // 使用自定义的HttpEntityEnclosingDeleteRequest或直接使用HttpDeleteWithBody类
+            HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
+            
+            // 设置JSON请求体
+            if (jsonBody != null && !jsonBody.isEmpty()) {
+                StringEntity entity = new StringEntity(jsonBody, "UTF-8");
+                entity.setContentType("application/json");
+                httpDelete.setEntity(entity);
+            }
+            
             // 添加请求头
             if (headers != null && !headers.isEmpty()) {
                 for (Map.Entry<String, String> header : headers.entrySet()) {
                     httpDelete.addHeader(header.getKey(), header.getValue());
                 }
             }
+            
+            // 如果没有明确设置Content-Type头且有请求体，则默认设置为application/json
+            if (jsonBody != null && !jsonBody.isEmpty() && (headers == null || !headers.containsKey("Content-Type"))) {
+                httpDelete.addHeader("Content-Type", "application/json");
+            }
+            
             // 执行请求并获取响应
             HttpResponse response = httpClient.execute(httpDelete);
             HttpEntity entity = response.getEntity();
+            
             // 转换响应内容为字符串
             if (entity != null) {
                 result = EntityUtils.toString(entity, "UTF-8");
             }
         } catch (Exception e) {
             // 记录异常但不抛出
-            e.printStackTrace();
-            // 或者使用日志框架记录
-            // logger.error("DELETE请求发生异常: " + e.getMessage(), e);
+            log.error("DELETE请求发生异常: {}", e.getMessage(), e);
         }
         return result;
+    }
+    
+    /**
+     * 支持请求体的HttpDelete请求
+     */
+    private static class HttpDeleteWithBody extends HttpPost {
+        public HttpDeleteWithBody(final String url) {
+            super(url);
+        }
+
+        @Override
+        public String getMethod() {
+            return "DELETE";
+        }
     }
 }
