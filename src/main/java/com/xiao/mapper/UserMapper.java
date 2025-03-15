@@ -1,13 +1,16 @@
 package com.xiao.mapper;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 import com.xiao.domain.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
 public interface UserMapper {
+    List<User> selectByUsername(@Param("username")String username);
+
+    User selectOneByUsername(@Param("username")String username);
+
     int deleteByPrimaryKey(Long id);
 
     int insert(User record);
@@ -19,10 +22,4 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-
-    User selectOneByUsername(@Param("username") String username);
-
-    List<User> selectByUsername(@Param("username") String username);
-
-    List<User> selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

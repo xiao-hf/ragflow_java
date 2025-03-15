@@ -30,13 +30,21 @@ public class UserController {
      * 用户注册
      *
      * @param registerRequest 注册请求
+     * @param request 请求对象，用于获取IP地址
      * @return 注册结果
      */
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "注册新用户")
-    public Result<String> register(@RequestBody RegisterRequest registerRequest) {
-        log.info("用户注册请求: {}", registerRequest.getUsername());
-        return userService.register(registerRequest);
+    public Result<String> register(@RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
+        // 获取IP地址，优先使用前端提供的IP
+        String ipAddress = registerRequest.getIpAddress();
+        if (ipAddress == null || ipAddress.isEmpty()) {
+            // 如果前端没有提供IP，才从请求头获取
+            ipAddress = getClientIpAddress(request);
+        }
+        
+        log.info("用户注册请求: {}, IP: {}", registerRequest.getUsername(), ipAddress);
+        return userService.register(registerRequest, ipAddress);
     }
 
     /**
@@ -49,8 +57,13 @@ public class UserController {
     @PostMapping("/login")
     @Operation(summary = "用户登录", description = "用户登录验证")
     public Result<String> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
-        // 获取客户端IP地址
-        String ipAddress = getClientIpAddress(request);
+        // 获取IP地址，优先使用前端提供的IP
+        String ipAddress = loginRequest.getIpAddress();
+        if (ipAddress == null || ipAddress.isEmpty()) {
+            // 如果前端没有提供IP，才从请求头获取
+            ipAddress = getClientIpAddress(request);
+        }
+        
         log.info("用户登录请求: {}, IP: {}", loginRequest.getUsername(), ipAddress);
         return userService.login(loginRequest, ipAddress);
     }

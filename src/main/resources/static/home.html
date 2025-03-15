@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格数Agent - 主页</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/font-face.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+</head>
+<body class="app-body">
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo.svg" alt="格数Agent Logo" class="logo-small">
+                <span class="app-name">格数 Agent</span>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="menu-item active">
+                    <a href="#"><i class="fas fa-chart-line"></i> 关系分析助手</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#"><i class="fas fa-file-alt"></i> 文案大师生成</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#"><i class="fas fa-file-signature"></i> 宣传标语生成</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#"><i class="fas fa-language"></i> 中英翻译专家</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#"><i class="fas fa-sitemap"></i> 内容分类</a>
+                </li>
+                <li class="sidebar-submenu">
+                    <span class="submenu-title">加载更多...</span>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-plus"></i> 新增助手</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="sidebar-history">
+                <h3>昨天</h3>
+                <ul class="history-list">
+                    <li><a href="#">数学1的含义或用途</a></li>
+                    <li><a href="#">宇宙的客观是什么</a></li>
+                    <li><a href="#">用户问题</a></li>
+                </ul>
+                
+                <h3>前30天</h3>
+                <ul class="history-list">
+                    <li><a href="#">用户输入内容无明确主题，无法...</a></li>
+                    <li><a href="#">温热的状态感受</a></li>
+                    <li><a href="#">用户输入了数字11.</a></li>
+                    <li><a href="#">用户输入人为实真表达.</a></li>
+                    <li><a href="#">用户输入了"<>".</a></li>
+                    <li><a href="#">用户输入的内容不足以其提供...</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <div class="header">
+                <div class="user-info">
+                    <span>肖黑飞</span>
+                    <img src="assets/avatar.svg" alt="用户头像" class="avatar">
+                </div>
+                <div class="user-menu">
+                    <button class="menu-button"><i class="fas fa-cog"></i> 设置</button>
+                    <div class="dropdown-menu">
+                        <a href="#"><i class="fas fa-user-cog"></i> 助手管理</a>
+                        <a href="#"><i class="fas fa-book"></i> 知识库管理</a>
+                        <a href="#"><i class="fas fa-user"></i> 用户管理</a>
+                        <a href="#"><i class="fas fa-users"></i> 部门管理</a>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-messages">
+                    <div class="agent-message">
+                        <div class="agent-avatar">
+                            <img src="assets/agent-avatar.svg" alt="Agent Avatar">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="agent-name">我是 格数 Agent</span>
+                                <span class="welcome-text">很高兴见到你！</span>
+                            </div>
+                            <div class="message-body">
+                                <p>我是来自于 <span class="deepseek">deepseek</span> 的智能助手，有什么问题都能为你解答。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <div class="input-area">
+                        <textarea placeholder="给格数 Agent 发送消息"></textarea>
+                        <div class="input-tools">
+                            <button class="tool-button"><i class="fas fa-paperclip"></i></button>
+                            <span class="send-tip">使用 Enter 发送消息，使用 Shift + Enter 换行</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-shortcuts">
+                        <div class="shortcut-item">
+                            <div class="shortcut-icon document"><i class="fas fa-file-alt"></i></div>
+                            <span>文案大师生成</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <div class="shortcut-icon propaganda"><i class="fas fa-bullhorn"></i></div>
+                            <span>宣传标语生成</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <div class="shortcut-icon translate"><i class="fas fa-language"></i></div>
+                            <span>中英翻译专家</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <div class="shortcut-icon classify"><i class="fas fa-sitemap"></i></div>
+                            <span>内容分类</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <div class="shortcut-icon faq"><i class="fas fa-question-circle"></i></div>
+                            <span>合同风险解读</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <div class="shortcut-icon translate"><i class="fas fa-exchange-alt"></i></div>
+                            <span>文案导手</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>&copy; 2023 格数科技. 保留所有权利.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查用户是否已登录
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            
+            if (!token) {
+                // 如果没有令牌，重定向到登录页面
+                console.log('未登录，重定向到登录页面');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // 获取当前用户信息（可选，如果你有获取用户信息的API）
+            // 这里可以添加获取用户信息的API调用
+            // 示例代码：
+            /*
+            fetch('/api/user/info', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.code === 200) {
+                    // 成功获取用户信息
+                    const userInfo = result.data;
+                    document.querySelector('.user-info span').textContent = userInfo.nickname || userInfo.username;
+                    // 更新其他用户信息...
+                } else {
+                    // 获取用户信息失败，可能是令牌过期
+                    console.log('获取用户信息失败，重定向到登录页面');
+                    logout();
+                }
+            })
+            .catch(error => {
+                console.error('获取用户信息出错:', error);
+                // 可以根据错误类型决定是否重定向
+            });
+            */
+            
+            // 添加退出登录功能
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+            
+            function logout() {
+                // 清除令牌
+                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
+                
+                // 这里可以添加实际的注销逻辑，例如调用后端API
+                // 例如：fetch('/api/user/logout', { method: 'POST' })
+                
+                console.log('用户退出登录');
+                
+                // 跳转回登录页面
+                window.location.href = 'login.html';
+            }
+            
+            // 这里可以添加主页的JavaScript逻辑
+            const textarea = document.querySelector('.input-area textarea');
+            
+            // 处理Enter键发送消息
+            textarea.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            function sendMessage() {
+                const message = textarea.value.trim();
+                if (message) {
+                    console.log('发送消息:', message);
+                    // 这里可以添加将消息发送到后端的逻辑
+                    // 然后在UI中添加消息
+                    
+                    // 清空输入框
+                    textarea.value = '';
+                }
+            }
+            
+            // 快捷功能点击
+            const shortcutItems = document.querySelectorAll('.shortcut-item');
+            shortcutItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const functionality = this.querySelector('span').textContent;
+                    console.log('选择功能:', functionality);
+                    // 可以在这里处理相应的功能
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

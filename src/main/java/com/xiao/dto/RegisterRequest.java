@@ -21,4 +21,7 @@ public class RegisterRequest {
 
     @Schema(description = "电子邮箱", example = "john@example.com")
     private String email;
+    
+    @Schema(description = "IP地址", example = "192.168.1.1")
+    private String ipAddress;
 } 

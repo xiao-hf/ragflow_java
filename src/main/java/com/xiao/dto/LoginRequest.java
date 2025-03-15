@@ -15,4 +15,7 @@ public class LoginRequest {
 
     @Schema(description = "密码", required = true, example = "password123")
     private String password;
+    
+    @Schema(description = "IP地址", example = "192.168.1.1")
+    private String ipAddress;
 }

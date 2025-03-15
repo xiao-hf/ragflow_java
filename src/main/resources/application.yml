@@ -3,6 +3,14 @@ server:
 spring:
   application:
     name: ragflow_java
+  # 配置devtools
+  devtools:
+    restart:
+      enabled: true  # 启用热部署
+      additional-paths: src/main/java  # 设置重启的目录
+      exclude: static/**,public/**  # 静态资源不重启
+    livereload:
+      enabled: true  # 启用livereload
   datasource:
     url: jdbc:mysql://localhost:3306/ragflow_demo?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8
     username: root

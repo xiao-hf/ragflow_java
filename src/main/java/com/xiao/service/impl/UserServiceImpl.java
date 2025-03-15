@@ -32,11 +32,12 @@ public class UserServiceImpl implements UserService {
      * 用户注册
      *
      * @param registerRequest 注册请求
+     * @param ipAddress 注册IP地址
      * @return 注册结果
      */
     @Override
     @Transactional
-    public Result<String> register(RegisterRequest registerRequest) {
+    public Result<String> register(RegisterRequest registerRequest, String ipAddress) {
         // 检查用户名是否已存在
         String username = registerRequest.getUsername();
         List<User> existingUsers = userMapper.selectByUsername(username);
@@ -68,7 +69,7 @@ public class UserServiceImpl implements UserService {
             // 清除敏感信息
             user.setPassword(null);
             
-            log.info("用户注册成功: {}", user.getUsername());
+            log.info("用户注册成功: {}, IP: {}", user.getUsername(), ipAddress);
             return Result.success("注册成功");
         } catch (Exception e) {
             log.error("用户注册失败", e);

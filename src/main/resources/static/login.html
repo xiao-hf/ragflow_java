@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格数Agent - 登录</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/font-face.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <img src="assets/logo.svg" alt="格数Agent Logo" class="logo">
+                <h1>格数Agent</h1>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" data-target="login-form">登录</button>
+                <button class="tab" data-target="register-form">注册</button>
+            </div>
+            
+            <form id="login-form" class="form active">
+                <div class="form-group">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" name="username" placeholder="请输入用户名" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" name="password" placeholder="请输入密码" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        <label for="remember-me">记住我</label>
+                    </div>
+                    <a href="#" class="forgot-password">忘记密码？</a>
+                </div>
+                
+                <div id="login-error" class="error-message"></div>
+                
+                <button type="submit" class="btn-submit">登录</button>
+            </form>
+            
+            <form id="register-form" class="form">
+                <div class="form-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" name="username" placeholder="请输入用户名" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-nickname">昵称</label>
+                    <input type="text" id="register-nickname" name="nickname" placeholder="请输入昵称">
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email">邮箱</label>
+                    <input type="email" id="register-email" name="email" placeholder="请输入邮箱" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" name="password" placeholder="请输入密码" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-confirm-password">确认密码</label>
+                    <input type="password" id="register-confirm-password" name="confirm-password" placeholder="请再次输入密码" required>
+                </div>
+                
+                <div class="agreement">
+                    <input type="checkbox" id="agreement" name="agreement" required>
+                    <label for="agreement">我已阅读并同意 <a href="#">用户协议</a> 和 <a href="#">隐私政策</a></label>
+                </div>
+                
+                <div id="register-error" class="error-message"></div>
+                
+                <button type="submit" class="btn-submit">注册</button>
+            </form>
+            
+            <div class="other-login">
+                <p>其他登录方式</p>
+                <div class="social-logins">
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-qq"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-footer">
+            <p>&copy; 2023 格数科技. 保留所有权利.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const forms = document.querySelectorAll('.form');
+            const API_BASE_URL = '/api';
+            
+            // 为展示错误信息添加的CSS样式
+            const styleElement = document.createElement('style');
+            styleElement.textContent = `
+                .error-message {
+                    color: #FF5630;
+                    font-size: 12px;
+                    margin-bottom: 10px;
+                    min-height: 20px;
+                }
+                .loading {
+                    cursor: wait !important;
+                    opacity: 0.7;
+                }
+                .loading::after {
+                    content: ' 处理中...';
+                }
+            `;
+            document.head.appendChild(styleElement);
+            
+            // 获取IP地址的通用函数
+            async function getIPAddress() {
+                try {
+                    const response = await fetch('https://ifconfig.me/ip');
+                    if (!response.ok) {
+                        throw new Error('IP获取失败');
+                    }
+                    return await response.text();
+                } catch (error) {
+                    console.warn('无法获取用户IP地址:', error);
+                    return ''; // 返回空字符串表示获取失败
+                }
+            }
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    
+                    // 更新标签状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 清除错误信息
+                    document.querySelectorAll('.error-message').forEach(el => {
+                        el.textContent = '';
+                    });
+                    
+                    // 更新表单显示
+                    forms.forEach(form => {
+                        if (form.id === target) {
+                            form.classList.add('active');
+                        } else {
+                            form.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // 登录表单提交
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const loginBtn = this.querySelector('.btn-submit');
+                const errorElement = document.getElementById('login-error');
+                
+                // 清除之前的错误信息
+                errorElement.textContent = '';
+                
+                // 禁用按钮，防止重复提交
+                loginBtn.disabled = true;
+                loginBtn.classList.add('loading');
+                
+                const username = document.getElementById('login-username').value;
+                const password = document.getElementById('login-password').value;
+                const rememberMe = document.getElementById('remember-me').checked;
+                
+                // 创建登录请求对象
+                const loginData = {
+                    username: username,
+                    password: password
+                };
+                
+                // 先获取用户IP地址，然后再发送登录请求
+                getIPAddress()
+                    .then(ip => {
+                        if (ip) {
+                            console.log('获取到用户IP:', ip);
+                            // 将IP添加到登录数据中
+                            loginData.ipAddress = ip;
+                        } else {
+                            console.log('无法获取用户IP，继续登录流程');
+                        }
+                        
+                        // 发送登录请求到后端API
+                        return fetch(`${API_BASE_URL}/user/login`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(loginData)
+                        });
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        // 恢复按钮状态
+                        loginBtn.disabled = false;
+                        loginBtn.classList.remove('loading');
+                        
+                        // 处理登录响应
+                        if (result.code === 200) {
+                            // 登录成功
+                            console.log('登录成功:', result.data);
+                            
+                            // 保存令牌到本地存储
+                            if (rememberMe) {
+                                localStorage.setItem('token', result.data);
+                            } else {
+                                sessionStorage.setItem('token', result.data);
+                            }
+                            
+                            // 跳转到主页
+                            window.location.href = 'home.html';
+                        } else {
+                            // 显示错误信息
+                            errorElement.textContent = result.message || '登录失败，请检查用户名和密码';
+                        }
+                    })
+                    .catch(error => {
+                        // 恢复按钮状态
+                        loginBtn.disabled = false;
+                        loginBtn.classList.remove('loading');
+                        
+                        // 显示错误信息
+                        console.error('登录请求出错:', error);
+                        errorElement.textContent = '网络错误，请稍后重试';
+                    });
+            });
+            
+            // 注册表单提交
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const registerBtn = this.querySelector('.btn-submit');
+                const errorElement = document.getElementById('register-error');
+                
+                // 清除之前的错误信息
+                errorElement.textContent = '';
+                
+                const username = document.getElementById('register-username').value;
+                const nickname = document.getElementById('register-nickname').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                const agreement = document.getElementById('agreement').checked;
+                
+                // 前端表单验证
+                if (password !== confirmPassword) {
+                    errorElement.textContent = '两次密码输入不一致，请重新输入';
+                    return;
+                }
+                
+                if (!agreement) {
+                    errorElement.textContent = '请阅读并同意用户协议和隐私政策';
+                    return;
+                }
+                
+                // 禁用按钮，防止重复提交
+                registerBtn.disabled = true;
+                registerBtn.classList.add('loading');
+                
+                // 创建注册请求对象
+                const registerData = {
+                    username: username,
+                    nickname: nickname || username,
+                    email: email,
+                    password: password
+                };
+                
+                // 先获取用户IP地址，然后再发送注册请求
+                getIPAddress()
+                    .then(ip => {
+                        if (ip) {
+                            console.log('获取到用户IP:', ip);
+                            // 将IP添加到注册数据中
+                            registerData.ipAddress = ip;
+                        } else {
+                            console.log('无法获取用户IP，继续注册流程');
+                        }
+                        
+                        // 发送注册请求到后端API
+                        return fetch(`${API_BASE_URL}/user/register`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(registerData)
+                        });
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        // 恢复按钮状态
+                        registerBtn.disabled = false;
+                        registerBtn.classList.remove('loading');
+                        
+                        // 处理注册响应
+                        if (result.code === 200) {
+                            // 注册成功
+                            console.log('注册成功:', result.data);
+                            
+                            // 显示成功提示
+                            alert('注册成功，请登录');
+                            
+                            // 重置表单并切换到登录页
+                            document.getElementById('register-form').reset();
+                            document.querySelector('.tab[data-target="login-form"]').click();
+                        } else {
+                            // 显示错误信息
+                            errorElement.textContent = result.message || '注册失败，请稍后重试';
+                        }
+                    })
+                    .catch(error => {
+                        // 恢复按钮状态
+                        registerBtn.disabled = false;
+                        registerBtn.classList.remove('loading');
+                        
+                        // 显示错误信息
+                        console.error('注册请求出错:', error);
+                        errorElement.textContent = '网络错误，请稍后重试';
+                    });
+            });
+        });
+    </script>
+</body>
+</html> 
